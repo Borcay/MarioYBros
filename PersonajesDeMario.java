@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Nintendo {
+public class PersonajesDeMario {
 
     public abstract static class Personaje {
         protected String nombre;
@@ -65,3 +65,31 @@ public class Nintendo {
             obj.recibirDano(20);
         }
     }
+
+    // Enemigo de ejemplo para recibir los ataques
+    public static class Orco extends Personaje {
+        public Orco() {
+            super("Orco", 2, 200);
+        }
+
+        @Override
+        public void atacar(Personaje obj) {
+            obj.recibirDano(15);
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Personaje> equipo = new ArrayList<>();
+        equipo.add(new Mario());   // ← corregido
+        equipo.add(new Luigi());
+        equipo.add(new Toad());
+
+        Personaje orco = new Orco(); // ← definido correctamente
+        System.out.println("Antes: " + orco);
+
+        for (Personaje p : equipo) {
+            p.atacar(orco);          // ← POLIMORFISMO ✨
+            System.out.println(p.nombre + " atacó → " + orco);
+        }
+    }
+}
